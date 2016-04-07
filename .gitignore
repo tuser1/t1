@@ -5,8 +5,6 @@
 # Netbeans proj folder [IF stored in working dir]:
 nbproject/
 
-# git-log.txt
-
 # --- IGNORE-CASE glob patterns for .jpg, .gif, .ico ---
 *.[jJ][pP][gG]
 *.[gG][iI][fF]
