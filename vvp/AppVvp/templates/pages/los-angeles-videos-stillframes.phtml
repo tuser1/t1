@@ -1,0 +1,56 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\General\BusDefs;
+use AppVvp\Pages\StillImgsPage;
+
+/**
+ * Content for Sample video stillframes/images from prior weddings
+ */
+
+?>
+<?php // -------- GALLERY-IMAGES TABLE NAV LINKS --------- ?>
+<div id="stillFrTitls" class="dspTblCentered">
+    <span id="stillFrTitle">
+		Please enjoy these sample still frames from our Wedding Videos ...</span>
+    <a id="btn_prev" class="<?php echo hh(App::$page->getSiBtnPrevSelected()); ?>" 
+        href="<?php echo 
+			uu( SAFE_RU_CURR_PAGE_URL . QSDLM1 . StillImgsPage::SI_GETV_IMGPGOPT . '=' . 
+					ur(App::$page->getSiPagPrev() * -1) ); ?>"><< Back 
+    </a>
+    <!-- onchange: reload this page with selected page number -->
+    <select id="stillFrPagSelLst">
+    </select>
+    <a id="btn_next" class="<?php echo hh(App::$page->getSiBtnNextSelected()); ?>" 
+        href="<?php echo 
+			uu( SAFE_RU_CURR_PAGE_URL . QSDLM1 . StillImgsPage::SI_GETV_IMGPGOPT . '=' . 
+					ur(App::$page->getSiPagNext()) ); ?>"> >> Forward
+    </a>
+</div>
+<?php // -------- GALLERY-IMAGES TABLE --------- ?>
+<div class="dspTblCentered" style="border-collapse:separate; border-spacing:1.5em;">
+<?php foreach (App::$page->getSiGalleryAry() as $rownum => $colary): ?>
+    <div class="dspTblRow">
+	<?php echo "\n";
+	foreach ($colary as $colnum => $actualImgNbr): ?>
+        <div class="borderOuter dspTblCell stillFrPadding">
+            <div class="borderInner stillFrPadding">
+                <img id="im<?php echo hh(sprintf('%03d', App::$page->getSiImgNumOffset())); ?>" 
+                  alt="<?php echo BusDefs::BUSNAME1_F2; ?> Photo <?php echo hh(sprintf('%02d' , 
+						  App::$page->getSiImgNumOffset())); ?>" 
+                  src="<?php echo hh(FilNams::getRelPathGallery()); ?>/<?php echo 
+                  FilNams::FNAM_PREFIX_GALLERY; ?><?php echo 
+                      hh(sprintf('%03d', $actualImgNbr)); ?>.jpg">
+            </div>
+        </div>
+	<?php echo "\n";
+	endforeach ?>
+    </div>
+<?php endforeach ?>
+</div>

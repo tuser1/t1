@@ -1,0 +1,57 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\General\SysMain;
+
+/**
+ * Content for SITE INFO page
+ */
+?>
+<h3>Technical Info</h3>
+<p>
+<?php 
+		echo '    <strong>Server name: </strong>' , hh(RAW_SERVER_NAME) , "<br /><br />\n";
+
+		echo '    <strong>Client host name (remote host): </strong>' , 
+					hh(gethostbyaddr($_SERVER['REMOTE_ADDR'])), "<br /><br />\n";
+					//can also use $_SERVER['REMOTE_HOST']
+
+	//	echo "    <strong>Client IP address ['REMOTE_ADDR']:</strong><br />\n";
+	//	echo "    " . $_SERVER['REMOTE_ADDR'], "<br /><br />\n";
+
+		echo "    <strong>Client browser info ['HTTP_USER_AGENT']:</strong><br />\n";
+		echo "    " . hh($_SERVER['HTTP_USER_AGENT']), "<br /><br />\n";
+
+	//	echo "    <strong>SESSION ID:</strong><br />\n";
+	//	echo "    " . session_id() . "<br /><br />\n";
+?>
+		<script>
+
+        document.write('<strong>Client JavaScript/DOM - navigator.appName:</strong><br />' + 
+				navigator.appName + '<br /><br />');
+
+        document.write('<strong>Client JavaScript/DOM - navigator.appVersion:</strong><br />' + 
+				navigator.appVersion);
+
+		</script>
+<?php 
+		echo "<br /><br /><br />\n";
+
+	//	echo "    <strong>Form validation (CFV):</strong> " . 
+	//			Validator::getCfvMethod() . "<br /><br />\n";
+
+		echo "    <strong>\$_SESSION VARIABLES:</strong><br />\n";
+		echo '    <pre>';
+		Print_r($_SESSION);
+		echo '    </pre>';
+
+		echo "    <strong>\$_SERVER VARIABLES:</strong><br />\n";
+		SysMain::dspServerKeys();
+?>
+</p>

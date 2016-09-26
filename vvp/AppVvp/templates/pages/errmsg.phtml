@@ -1,0 +1,23 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\General\ErrHandler;
+
+/**
+ * Content for Error message page
+ */
+?>
+<div id="pagErrMsg">
+    <div id="mainOuterBorder1_100pct" class="borderOuter">
+      <div class="borderInner" style="padding: 0.75em;">
+        <h2>An error has occurred</h2>
+		<?php ErrHandler::renderErrMsg1(App::$page->getPageErrToken()); ?>
+      </div>
+    </div>
+</div>

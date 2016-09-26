@@ -1,0 +1,124 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\General\SysMain;
+
+/**
+ *
+ */
+
+$_filter = $this->getFilter();
+$_ignore = array();
+// ========================================================
+if ($_filter) {
+	$_ignore["NEW SESSION:"] = "NEW SESSION:";
+}
+// ========================================================
+
+function xecho($lvl, $parm1)
+{
+	$spaces = 
+		"                                                                              ";
+	echo substr($spaces, 0, ($lvl * 3)) . $parm1;
+}
+
+$dlm = SysMain::LOGFILE_DLM;
+$_recsz = 512;
+$_filtered = array();
+$errlog = FilNams::getErrorLogFnam();
+
+if (array_key_exists('SERVER_ADDR', $_SERVER))
+	$_server_ip_addr 	= $_SERVER['SERVER_ADDR'];
+else
+	$_server_ip_addr 	= "(no server IP addr)";
+$_client_remote_hostnam = gethostbyaddr($_SERVER['REMOTE_ADDR']); //also use $_SERVER['REMOTE_HOST']
+
+$dteprv = "00-Xxx-0000";
+
+// ===================================================================
+// ===================== START OF HTML CONTENT =======================
+// ===================================================================
+echo '<div>', "\n";
+
+if ($_filter)
+	echo "*WARNING* Filter is ON ...<br />\n";
+else
+	echo "Filter is OFF ...<br />\n";
+
+echo '<h3>', date("Y-m-d - h:i a"), ' - PHP Errors Log Listing</h3>', "\n";
+echo '<div style="width: 300%" class="text1">', "\n";
+
+echo '<a href="', uu( FilNams::getPgUrl(FilNams::PN_ERASEFILE) . QSDLM1 . 'ftyp=E' ), 
+		'">!! ERASE !! PHP Errors Log</a><br />', "\n";
+echo '<a href="', uu( FilNams::getPgUrl(FilNams::PN_ERASEFILE) . QSDLM1 . 'ftyp=DE' ), 
+		'">!! ERASE !! PHP Error-Msg Files</a><br />', "\n";
+
+echo '<br />';
+if (!is_file($errlog)) {
+	echo
+		"<br /><strong>*******************************************************" . 
+		"<br />* ERROR: Invalid filename ref '$errlog' -OR- does not exist." . 
+		"<br />*******************************************************</strong>";
+	exit();
+}
+echo "<strong>Client hostname/ip address: $_client_remote_hostnam - ", $_SERVER['REMOTE_ADDR'];
+echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;Server name/ip address: " . RAW_SERVER_NAME . " - $_server_ip_addr\n";
+echo "<br />===================================================\n";
+echo "</strong>\n";
+$cnt1 = 0;
+echo "<br />Reading error log ...\n";
+$fh = fopen($errlog, 'r'); 
+while (!feof($fh)) { 
+	$cnt1++;
+	$data[$cnt1] = trim(fgets($fh, $_recsz));
+} 
+echo " Closing error log ...\n";
+fclose($fh); 
+
+for ($x = $cnt1 - 1; $x > 0; $x--) {
+	$ok = true;
+	if ($_filter) {
+		foreach ($_ignore as $key => $val) {
+			if (strpos($data[$x], $key) !== false)   $ok = false;
+		}
+		unset($key);  unset($val);  //per PHP doc
+	}
+	if ($ok) {
+		$dtecur = substr($data[$x], 1, 11);
+		if ($dtecur != $dteprv) 	{$dteprv = $dtecur;		echo "<br />\n";}
+		echo "<br />" . 
+			//sprintf("%04d", $x) . " " . 
+			substr($data[$x], 0, $_recsz) . "\n";
+	}
+	else
+		$_filtered[] = $data[$x];
+}
+echo "<br />===========================================================================\n";
+if ($_filter) {
+	echo "<br /><br /><strong>The following filter-keys are defined:</strong>\n";
+	foreach ($_ignore as $key => $val) {
+		echo "<br />" . $key .  " $dlm " . $val . "\n";
+	}
+	unset($key);  unset($val);  //per PHP doc
+	echo "<br /><br />===========================================================================\n";
+	echo "<br /><strong>The following records were filtered out:</strong>\n";
+	$dteprv = "00-Xxx-0000";
+	foreach ($_filtered as $key => $val) {
+		$dtecur = substr($val, 1, 11);
+		if ($dtecur != $dteprv) {
+			$dteprv = $dtecur;
+			echo "<br />\n";
+		}
+		echo "<br />" . $key .  " $dlm " . $val . "\n";
+	}
+}
+echo "<br />===========================================================================\n";
+
+xecho(1, "</div>\n");
+echo "</div>\n";

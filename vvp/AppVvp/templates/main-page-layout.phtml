@@ -1,0 +1,81 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\General\AuthUser;
+use AppVvp\General\BusDefs;
+use AppVvp\General\PgMsgs;
+
+/**
+ * MAIN TEMPLATE FOR SITE'S PAGES
+ */
+
+?>
+<!doctype html>
+<html lang="en">
+<head>
+<?php require FilNams::DN_TEMPLATES . FilNams::DS . 'js-disabled-check' . 
+		'.' . TMPL_FILEEXT; ?>
+<meta charset="utf-8">
+<title><?php echo hh(App::$page->getHtmTitle()); ?></title>
+<meta name="description" content="<?php echo hh(App::$page->getMetaDesc()); ?>">
+<meta name="author" content="<?php echo BusDefs::AUTHOR_FIRSTNAME; ?> <?php echo 
+			BusDefs::AUTHOR_LASTNAME; ?>">
+<meta name="copyright" content="<?php echo BusDefs::COPYRIGHT_YEAR1; ?> <?php echo 
+			BusDefs::BUSNAME1_F1; ?>. All rights reserved.">
+<link rel="shortcut icon" href="<?php echo uu(FilNams::getRelPathImages()), '/', 
+			FilNams::CO_SHORTCUT_ICON1; ?>">
+<!-- Add HTML5 element support for IE 8 or earlier -->
+<!--[if lte IE 8]>
+<script src="<?php echo hh(FilNams::getRelPathJs()); ?>/libs/html5shiv-printshiv.js"></script>
+<![endif]-->
+<?php require FilNams::DN_DCSS . FilNams::DS . 'common.dcss.' . PG_FILEEXT; ?>
+<link href="<?php echo FilNams::getRelPathCss(); ?>/common.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+<header id="mainHdr" role="banner">
+    <div>
+        <img id="busBannerImg" border="0" src="<?php echo hh(App::$page->getLogo1()); ?>" 
+                alt="<?php echo hh(App::$page->getLogo1Alt()); ?>">
+    </div>
+    <div>
+        <?php echo hh(AuthUser::getLoginStatusMsg1()); ?>&nbsp;&nbsp;-&nbsp;&nbsp;<a class="linkSiteTheme" 
+            href="<?php echo uu(AuthUser::getLoginLinkUrl()); ?>"><?php echo 
+					hh(AuthUser::getLoginLinkText()); ?></a>
+        <?php if (AuthUser::getNewUserLinkUrl() != ''): ?>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a class="linkSiteTheme" 
+            href="<?php echo uu(AuthUser::getNewUserLinkUrl()); ?>"><?php echo 
+					hh(AuthUser::getNewUserLinkText()); ?></a>
+        <?php endif; ?>
+    </div>
+	<?php echo App::$page->renderMenuLinks(); ?>
+	<?php PgMsgs::renderPageMsgs(); ?>
+    <h1><?php echo App::$page->renderMainH1(); ?></h1>
+</header>
+
+<?php
+// ================================================================
+// ================== START OF HTML CONTENT =======================
+// ================================================================
+App::$page->getPageContent();
+// ================================================================
+// =================== END OF HTML CONTENT ========================
+// ================================================================
+?>
+
+<footer id="mainFooter" role="contentinfo">
+	<?php echo App::$page->renderMenuLinks(); ?>
+    <div id="copyright">
+        Copyright &copy; <?php echo BusDefs::COPYRIGHT_YEAR1; ?> <?php echo 
+				BusDefs::BUSNAME1_F1; ?>. All rights reserved.
+    </div>
+</footer>
+<?php App::$page->getJsFooter(); ?>
+</body>
+</html>

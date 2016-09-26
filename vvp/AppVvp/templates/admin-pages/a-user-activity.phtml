@@ -1,0 +1,43 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\Db\DbAccess;
+
+/**
+ * Content for USER ACTIVITY page
+ */
+?>
+<div class="borderOuter" style="width: 60.0%;">
+  <div class="borderInner" style="text-align: center;">
+	<h3>User Activity Log</h3>
+  </div>
+</div>
+
+<br>
+<table class="cntr_wd80pct">
+    <tr>
+        <th>Seq#</th>
+        <th>User</th>
+        <th>Act CD</th>
+        <th>Description</th>
+        <th>Session ID</th>
+        <th>Time Created</th>
+        <th>SQL Timestamp</th>
+    </tr>
+<?php
+$res = DbAccess::getUserActivity();
+foreach ($res as $SQL_ROW => $SQL_COLS_ARY):
+	echo '<tr>', "\n";
+	foreach ($SQL_COLS_ARY as $COL => $VAL):
+		echo '<td>[', hh($VAL), ']</td>', "\n";
+	endforeach;
+	echo '</tr>', "\n";
+endforeach;
+?>
+</table>

@@ -1,0 +1,43 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+/**
+ * TEMPLATE FOR SITE'S ADMIN PAGES
+ */
+
+?>
+<!doctype html>
+<html lang="en">
+<head>
+<?php require FilNams::DN_TEMPLATES . FilNams::DS . 'js-disabled-check' . 
+		'.' . TMPL_FILEEXT; ?>
+<meta charset="utf-8">
+<title><?php echo hh(App::$page->getHtmTitle()); ?></title>
+<link rel="shortcut icon" href="<?php echo uu(FilNams::getRelPathImages()), '/', 
+		FilNams::CO_SHORTCUT_ICON1; ?>">
+<?php require FilNams::DN_DCSS . FilNams::DS . 'admin.dcss.' . PG_FILEEXT; ?>
+<link href="<?php echo FilNams::getRelPathCss(); ?>/admin.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+<?php require FilNams::DN_TEMPLATES . FilNams::DS . 'admin-nav' . 
+		'.' . TMPL_FILEEXT; ?>
+<?php
+// ================================================================
+// ================== START OF HTML CONTENT =======================
+// ================================================================
+App::$page->getPageContent();
+// ================================================================
+// =================== END OF HTML CONTENT ========================
+// ================================================================
+echo "<br>\n";
+renderMenulnks();
+?>
+</body>
+</html>

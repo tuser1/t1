@@ -1,0 +1,19 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+/**
+ * JavaScript footer for videos pages
+ */
+
+echo '<script src="', hh(FilNams::getRelPathJs()), '/libs/jquery.min.js"></script>', "\n";
+echo '<script src="', hh(FilNams::getRelPathJs()), '/json-common.js"></script>', "\n";
+echo '<script>', "\n";
+App::$page->renderJson();
+echo '</script>', "\n";
+echo '<script src="', hh(FilNams::getRelPathJs()), '/videos.js"></script>', "\n";

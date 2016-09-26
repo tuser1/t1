@@ -1,0 +1,38 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\General\PgLinkFactory;
+use AppVvp\Validators\Validator;
+
+/**
+ * JavaScript footer for forms pages
+ */
+?>
+<script src="<?php echo hh(FilNams::getRelPathJs()); ?>/libs/jquery.min.js"></script>
+<script src="<?php echo hh(FilNams::getRelPathJs()); ?>/json-common.js"></script>
+<script>
+<?php
+App::$page->getForm1()->renderJson();
+
+if (Validator::isCfvMethod(Validator::CFV_AJAX)):
+?>
+</script>
+<script src="<?php echo hh(FilNams::getRelPathJs()); ?>/form-ajax-audit.js"></script>
+<script>
+<?php
+
+elseif (Validator::isCfvMethod(Validator::CFV_JS)):
+?>
+</script>
+<script src="<?php echo hh(FilNams::getRelPathJs()); ?>/form-audit.js"></script>
+<?php endif;
+if (PgLinkFactory::isCurrentPage(FilNams::PN_UPLOAD)): ?>
+<script src="<?php echo hh(FilNams::getRelPathJs()); ?>/ulf-progress.js"></script>
+<?php endif;
+echo "\n";

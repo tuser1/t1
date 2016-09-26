@@ -1,0 +1,62 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\Forms\Form;
+use AppVvp\General\SysMain;
+use AppVvp\Pages\Page;
+use AppVvp\Validators\Validator;
+
+/**
+ * Content for Upload page
+ */
+?>
+<div id="mainOuterBorder1" class="borderOuter" style="width: 80.0%;">
+    <div class="borderInner">
+        <h2>
+            Upload a video file to your account
+        </h2>
+		<p class="pAlignC">
+			Maximum upload file size: <?php echo hh(ini_get('upload_max_filesize') . ' / ' . 
+				number_format(Validator::getPhpUlMaxFilSizBytes()) . ' bytes'); // format with commas?><br />
+		</p>
+        <form class="pagForm" id="<?php echo hh(App::$page->getForm1()->getFormName()); ?>" 
+                name="<?php echo hh(App::$page->getForm1()->getFormName()); ?>" 
+                action="<?php echo uu(FilNams::getPgUrl(FilNams::PN_UPLOAD)); ?>" 
+                method="post" enctype="multipart/form-data">
+			<?php App::$page->getForm1()->renderHiddenFfos1(Page::INDENT_4); ?>
+            <table class="cntr_wd98pct">
+                <tr>
+                    <td class="formFldDescr">
+                        <span class="alertColor">*required field</span>
+                    </td>
+                </tr>
+				<?php App::$page->getForm1()->renderFfos1(Page::INDENT_4); ?>
+            </table>
+            <div class="btnRow1">
+                <input class="btnForm" type="button" id="<?php echo 
+					Form::FBN_SUBMIT; ?>" name="<?php 
+					echo Form::FBN_SUBMIT; ?>" value="UPLOAD">
+                <input class="btnForm" type="button" id="btnCancelUpload" value="CANCEL UPLOAD">
+			<?php echo "\n"; if (Validator::isCfvMethod(Validator::CFV_JS) && 
+						!isset($_SESSION[SysMain::SV_JS_DISABLED])): ?>
+                <input class="btnForm" id="btnFormClearChgs" type="button" value="Clear (discard)">
+			<?php endif; ?>
+			<?php echo "\n"; if (SysMain::getBrowser() != SysMain::BROWSER_MSIE): ?>
+                <input class="btnForm" type="submit" form="FormReload" id="btnFormReload" value="Reload page">
+			<?php endif; ?>
+
+            </div>
+        </form>
+	<?php echo "\n"; if (SysMain::getBrowser() != SysMain::BROWSER_MSIE):
+		// For html5 form="FormReload" attrib - will work even is JS is disabled: ?>
+        <form id="FormReload" action="<?php echo uu(SAFE_RU_CURR_PAGE_URL); ?>">
+        </form>
+	<?php endif; ?>
+    </div>
+</div>

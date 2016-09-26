@@ -1,0 +1,60 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\General\BusDefs;
+
+/**
+ * Public page template - common code for VIDEO/WELCOME pages
+ * ================= 'WELCOME' PARAGRAPH ====================
+ */
+
+		echo "\n";
+		?>
+        <div id="mainP">
+            <span class="pAlignL">High quality, professional:</span>
+            <ul>
+                <li>Wedding Videos</li>
+                <li>Birthday Videos</li>
+                <li>Mitzvah Videos</li>
+                <li>Anniversary Videos</li>
+                <li>and Other Special Occasion Videos</li>
+            </ul>
+            <p class="pAlignL">
+            We will work with you to your satisfaction and will 
+            create a lovely, heart touching video of your once-in-a-lifetime event.
+            </p>
+            <p class="pAlignL">
+            <i><?php echo BusDefs::BUSNAME1_F2; ?></i> employs high-quality digital camcorders 
+            and technology. The video photography is done as unobtrusively as 
+            possible.
+            </p>
+            <p class="pAlignL">
+            We provide videography service anywhere within Los Angeles and the 
+            South Bay communities. Our prices start from 
+            <a class="linkSiteTheme" href="<?php echo 
+				uu(FilNams::getPgUrl(FilNams::PN_OPTIONS)); ?>">$500</a>.
+            &nbsp;&nbsp;Give us a call at 
+            <a class="linkSiteTheme" href="<?php echo 
+                uu(FilNams::getPgUrl(FilNams::PN_CONTACT)); ?>"><?php echo BusDefs::PHONE1_F1; ?></a>
+            or e-mail us at 
+            <a class="linkSiteTheme" href="mailto:<?php echo 
+					BusDefs::getMailTo1(); // already obfuscated; do not escape ?>">
+                    <?php echo BusDefs::EMAIL1_F1; ?></a>.
+            </p>
+            <p class="pAlignL">
+            Please enjoy the sample videos to your left.&nbsp; <strong>High-speed 
+            Internet access is required.</strong>
+            </p>
+            <p class="pAlignC">
+            Thank you for visiting this site.
+            </p>
+            <p class="pAlignR">
+            Congratulations and best wishes!
+            </p>
+        </div>

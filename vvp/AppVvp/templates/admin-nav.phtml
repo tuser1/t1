@@ -1,0 +1,96 @@
+<?php
+
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+namespace AppVvp;
+
+use AppVvp\General\BusDefs;
+use AppVvp\General\PgLinkFactory;
+use AppVvp\General\PgMsgs;
+use AppVvp\Pages\Page;
+use AppVvp\Validators\Validator;
+
+/**
+ * Admin page: render html menu links, render any page messages
+ */
+function bldMenuLnk($lnk, $last = false)
+{
+	$safeUrlLnk = uu(FilNams::getPgUrl($lnk));
+	$safeUrlDescr = hh(PgLinkFactory::getDescr1($lnk));
+	if ($lnk === $_SESSION[Page::SV_USERPAG]) {
+    	echo '    <a class="navlnk01" href="', $safeUrlLnk, '">', 
+			BusDefs::BUS_ACRONYM1, ': ', $safeUrlDescr, "</a>\n";
+	} elseif (!PgLinkFactory::isCurrentPage($lnk)) {
+		if ($lnk !== FilNams::PN_LOGOUT) {
+		    echo '    <a class="navlnk01" href="', $safeUrlLnk,      '">', 
+				$safeUrlDescr, "</a>\n";
+		} else {
+			echo '    <a class="navlnk01" href="', $safeUrlLnk,      '">', 
+				'Logout', "</a>\n";
+		}
+	} else {
+	    echo '    <span class="navlnk01">', $safeUrlDescr, "</span>\n";
+	}
+	if (!$last) {
+		echo '    <span class="navlnk01"> | </span>', "\n";
+	}
+}
+
+function renderMenulnks()
+{
+	echo '<div id="adminNavLnks" style="text-align: center;">', "\n";
+	bldMenuLnk(FilNams::PN_PHPINFO);
+    bldMenuLnk(FilNams::PN_SITEINFO);
+    bldMenuLnk(FilNams::PN_PW_HASH);
+	bldMenuLnk(FilNams::PN_USR_ACTIVITY);
+    bldMenuLnk(FilNams::PN_LIST_USERS);
+    bldMenuLnk(FilNams::PN_LOGFILE);
+    bldMenuLnk(FilNams::PN_PHPERRS);
+    bldMenuLnk(FilNams::PN_SETSESSVARS);
+    bldMenuLnk(FilNams::PN_LOGOUT);
+    bldMenuLnk($_SESSION[Page::SV_USERPAG], $last = true);
+	echo '</div>', "\n";
+}
+
+function setSessVarOptions()
+{
+	if (Validator::isCfvMethod(Validator::CFV_AJAX)) {
+		define('CFV_VAL1', Validator::CFV_JS);
+		define('CFV_VAL2', Validator::CFV_NONE);
+		define('CFV_CURR', Validator::CFV_AJAX);
+	} elseif (Validator::isCfvMethod(Validator::CFV_JS)) {
+		define('CFV_VAL1', Validator::CFV_AJAX);
+		define('CFV_VAL2', Validator::CFV_NONE);
+		define('CFV_CURR', Validator::CFV_JS);
+	} else {
+		define('CFV_VAL1', Validator::CFV_AJAX);
+		define('CFV_VAL2', Validator::CFV_JS);
+		define('CFV_CURR', Validator::CFV_NONE);
+	}
+	if ($_SESSION[Validator::SV_ENFORCE_PW_RULES]) {
+		define('PSWR_CURR_DSP', 'ON');
+		define('PSWR_NEW',  '0');
+		define('PSWR_NEW_DSP',  'OFF');
+	} else {
+		define('PSWR_CURR_DSP', 'OFF');
+		define('PSWR_NEW',  '1');
+		define('PSWR_NEW_DSP',  'ON');
+	}
+}
+
+if (!isset($_SESSION[Page::SV_ADMINPAG])) {
+	$_SESSION[Page::SV_ADMINPAG] = SAFE_UU_PHP_SELF_FNAM_NO_EXT;
+}
+if (!isset($_SESSION[Page::SV_USERPAG])) {
+	$_SESSION[Page::SV_USERPAG] = FilNams::PN_VIDSMY;
+}
+
+//=========================================================
+?>
+<h2>Admin Menu</h2>
+<?php
+renderMenulnks();
+PgMsgs::renderPageMsgs();

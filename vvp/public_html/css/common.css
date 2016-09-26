@@ -1,0 +1,331 @@
+/**~******************************************************************
+ * Copyright (c) 2016 Voila! Video Productions
+ *********************************************************************
+ */
+
+/**
+ * CSS for main/public pages
+ */
+
+html *
+{
+/*	====== GLOBAL DEFINITIONS ====== */
+	font-family: 'Times New Roman', Times, serif;
+/*	================================ */
+}
+
+body {
+	/* -------------------------------------------------------------
+	* !! IF USING [table] TAGs instead of [div]:
+	*	- global 'font-size' def must be placed here
+	*	- !! DO NOT place global 'font-size' def in CSS selector 'html *' !!
+	------------- */
+  	/* GLOBAL def: controls relative size of ALL object attribs */
+	font-size: 95%;
+	/* ------------------------------------------------------------- */
+	text-align: left;
+/*
+	background-color: #ffe7ff;
+	background-size: 1000px 1000px;
+	background-position: center;
+	background-repeat: no-repeat;
+*/
+	background-attachment: fixed;
+	margin: 0 auto;   /* 'auto' center the body */
+	padding: 0.5em 0 0 0;
+	position: relative;
+	/* Retains vertical scroll-bar even when not needed
+	   E.g., keeps 'Contact Us' page aligned with the other pages */
+	overflow-y: scroll;
+}
+
+/* ------------------------------------------------------------- */
+
+.vidLnksTbl {
+	border-spacing: 0.8em;
+}
+
+.vidLnkTNimg, .vidLnkTNsel, .vidLnkTNblank {
+	padding: 0.17em;
+}
+.vidLnkTNimg:hover {
+	opacity: 0.75;
+}
+.vidLnkTNsel {
+	text-align: center;
+}
+
+.vidLocOrWebMsg {
+	text-align: left;
+}
+
+.vidUpdBtn {
+	background-color: grey;
+	font-weight: bold;
+}
+
+/* ------------------------------------------------------------- */
+
+.stillFrPadding {
+	padding: 0.35em;
+}
+
+header#mainHdr {
+	text-align: center;
+}
+
+header#mainHdr h1 {
+	font-size: 1.7em;
+	line-height: 0.75em;
+}
+
+#busBannerImg {
+	padding: 0.7em 0 0 0;
+}
+
+
+.dspTable, .dspTblCentered {
+	display: table;
+}
+
+.dspTblCentered {
+	margin: 0 auto;
+}
+
+.dspTblRow {
+	display: table-row;
+}
+
+.dspTblCell {
+	display: table-cell;
+}
+
+/* ----------------------------------------------------- */
+div.borderInner, div.borderOuter {
+	margin: 0 auto;  /* 'auto' centers it */
+	border-style: solid;
+    border-width: 0.4em; /* 0.36em; */
+}
+div.borderOuter {
+	height: auto;
+}
+div#mainOuterBorder1 {
+	margin-top: 1.8em;
+}
+div#mainOuterBorder2, div#mainOuterBorder1_100pct {
+	margin-top: 1.0em;
+}
+div#mainOuterBorder1, div#mainOuterBorder2 {
+	width: 70.0%;
+}
+
+/* ----------------------------------------------------- */
+
+
+/* -------------------------------------------------------------
+* For maintining DFLT FONT-SIZE in a <table> container:
+*   These TAG REDEFs are only necessary for certain objs that are contained
+*   inside a <td> tag (problem is with NESTED tables ONLY?).
+*   Not required if a <div> 'table' is used.
+------------------------------- */
+input, select {font-size: 1.0em;}
+/* ------------------------------------------------------------- */
+
+table.cntr_wd60pct {
+	width:60%;
+	margin-left:20%;
+	margin-right:20%;
+}
+
+table.cntr_wd70pct {
+	width:70%;
+	margin-left:15%;
+	margin-right:15%;
+}
+
+table.cntr_wd80pct {
+	width:80%;
+	margin-left:10%;
+	margin-right:10%;
+}
+
+table.cntr_wd90pct {
+	width:90%;
+	margin-left:05%;
+	margin-right:05%;
+}
+
+table.cntr_wd98pct {
+	width:98%;
+	margin-left:01%;
+	margin-right:01%;
+}
+
+table.border01 {
+	border-width: 0.7em;
+	padding: 0.6em;
+	border-spacing: 0.0em;
+	border-style: ridge; /* double;  */
+}
+
+ul {
+	/* Keeps 'bullets' next to list items even when items are centered */
+	list-style-position: inside;
+}
+
+.reqFldMsg1 {
+	font-size: 0.9em;
+}
+
+a.linkNormalWeb {
+	font-weight: bold;
+}
+
+a.linkSiteTheme {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.menuLnkDlm01 {
+	font-size: 0.9em;
+	padding-left: 0.6em;
+	padding-right: 0.6em;
+}
+
+.curLnk, .mnuLnk {
+	font-weight: bold;
+}
+
+.mnuLnk {
+	text-decoration: none;
+}
+
+a {
+	font-weight: bold;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	font-size: 1.6em;
+	line-height: 1.0em;
+	text-align: center;
+}
+
+h3 {
+	text-align: center;
+}
+
+
+select#stillFrPagSelLst {
+	font-size: 0.8em;
+}
+
+.txtNotice1, .txtNotice2 {
+	color: #000000;
+	text-align: center;
+}
+
+.txtNotice1 {
+	font-size: 0.85em;
+}
+
+.txtNotice2 {
+	font-size: 0.9em;
+}
+
+#stillFrTitls {
+	padding: 0.5em 0 0 0;
+}
+/*#stillFrTitle {
+	font-size: 2.0em;
+	font-family: "Edwardian Script ITC";
+	padding: 0 0.8em 0 5.0em;
+}*/
+#stillFrTitle {
+	font-size: 1.2em;
+	/*font-weight: bold;*/
+	font-style: italic;
+	padding: 0 0.8em 0 6.5em;
+}
+
+a.stillFrBtn, a.stillFrBtnSel {
+	font-size: 0.8em;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.pAlignL {
+	text-align: left;
+}
+.pAlignC, .pContactUs {
+	text-align: center;
+}
+.pAlignR {
+	text-align: right;
+}
+
+.pContactUs {
+	font-weight:bold;
+}
+.contactUsNormal {
+	font-weight:normal;
+}
+
+#pagErrMsg {
+	padding: 1.5em  0  1.5em  0;
+}
+
+#pagErrMsgTxt {
+	font-size: 0.95em;
+}
+
+#vidPackages h4 {
+	line-height:0.25em;
+}
+
+#contactUs h3 {
+	line-height: 0.5em;
+	font-size: 1.0em;
+}
+
+.pagForm {
+	margin: 0  0  1.0em 0;
+}
+
+.formFldDescr {
+	text-align: right;
+}
+
+.formFldInput {
+	text-align: left;
+}
+
+.formFldErrDsp {
+	text-align: left;
+}
+
+.btnForm {
+	margin: 0  0.5em  0  0.5em;
+}
+
+.btnRow1 {
+	padding: 1.5em 0  0  0;
+	text-align: center;
+}
+
+footer#mainFooter {
+	text-align: center;
+	padding: 1.0em  0  1.0em  0;
+	clear: both;
+	overflow: auto;
+}
+
+footer#mainFooter div#copyright {
+	font-size: 0.85em;
+	padding: 0.5em 0 0 0;
+}
+
+/* ------------------------------------------------------------- */
