@@ -1,5 +1,0 @@
-commit 3a6c7b155276c766cbbcd50fb48568dc4ea945e7
-Author: tuser1 <tester@ca.rr.com>
-Date:   Tue Nov 17 17:07:41 2015 -0800
-
-    056 - reset git - moved app to subdir [vvp]
